@@ -1,0 +1,3 @@
+npm init adonis-ts-app@latest .
+
+node ace serve --watch 
