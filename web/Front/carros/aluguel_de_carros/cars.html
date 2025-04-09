@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoRent - Aluguel de Carros Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3366ff;
+            --primary-dark: #2541b2;
+            --secondary: #ff6b6b;
+            --dark: #2d3748;
+            --light: #f8f9fa;
+            --gray: #718096;
+            --light-gray: #e2e8f0;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1586&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Search Form */
+        .search-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.2);
+        }
+        
+        /* Car Categories */
+        .categories {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .category-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.05);
+        }
+        
+        .category-content {
+            padding: 20px;
+        }
+        
+        .category-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .category-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Featured Cars */
+        .featured {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .car-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .car-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .car-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .car-content {
+            padding: 20px;
+        }
+        
+        .car-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .car-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+        }
+        
+        .spec-item i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+        
+        .car-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        /* Why Choose Us */
+        .why-us {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col a {
+            color: var(--light-gray);
+            transition: var(--transition);
+        }
+        
+        .footer-col a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Auto<span>Rent</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#cars">Carros</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="#login" class="btn btn-outline">Login</a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Alugue o Carro Perfeito para Sua Viagem</h1>
+            <p>Mais de 100 veículos disponíveis para todas as ocasiões e orçamentos</p>
+            
+            <div class="search-container">
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="location">Local de Retirada</label>
+                        <select id="location" class="form-control">
+                            <option value="">Selecione um local</option>
+                            <option value="airport">Aeroporto</option>
+                            <option value="downtown">Centro da Cidade</option>
+                            <option value="beach">Zona Litorânea</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pickup-date">Data de Retirada</label>
+                        <input type="date" id="pickup-date" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-date">Data de Devolução</label>
+                        <input type="date" id="return-date" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn btn-primary">Buscar Carros</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Car Categories -->
+    <section class="categories" id="cars">
+        <div class="section-title">
+            <h2>Categorias de Carros</h2>
+            <p>Escolha entre nossa variedade de veículos para atender todas as suas necessidades</p>
+        </div>
+        
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Carro Econômico">
+                </div>
+                <div class="category-content">
+                    <h3>Econômico</h3>
+                    <p>Perfeito para viagens urbanas e economia de combustível</p>
+                    <div class="price">A partir de R$ 99/dia</div>
+                    <a href="#" class="btn btn-outline">Ver Opções</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="SUV">
+                </div>
+                <div class="category-content">
+                    <h3>SUV</h3>
+                    <p>Espaço e conforto para a família e terrenos diversos</p>
+                    <div class="price">A partir de R$ 199/dia</div>
+                    <a href="#" class="btn btn-outline">Ver Opções</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80" alt="Luxo">
+                </div>
+                <div class="category-content">
+                    <h3>Luxo</h3>
+                    <p>Experiência premium com os melhores modelos do mercado</p>
+                    <div class="price">A partir de R$ 399/dia</div>
+                    <a href="#" class="btn btn-outline">Ver Opções</a>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Esportivo">
+                </div>
+                <div class="category-content">
+                    <h3>Esportivo</h3>
+                    <p>Para quem busca performance e estilo em primeiro lugar</p>
+                    <div class="price">A partir de R$ 499/dia</div>
+                    <a href="#" class="btn btn-outline">Ver Opções</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Cars -->
+    <section class="featured">
+        <div class="section-title">
+            <h2>Carros em Destaque</h2>
+            <p>Nossos veículos mais populares entre os clientes</p>
+        </div>
+        
+        <div class="cars-grid">
+            <div class="car-card">
+                <div class="car-img">
+                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Toyota Corolla">
+                </div>
+                <div class="car-content">
+                    <h3>Toyota Corolla 2023</h3>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-car"></i> Sedan
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-gas-pump"></i> Flex
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-users"></i> 5 lugares
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tachometer-alt"></i> Automático
+                        </div>
+                    </div>
+                    <div class="car-footer">
+                        <div class="price">R$ 149/dia</div>
+                        <a href="#" class="btn btn-primary">Alugar Agora</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="car-card">
+                <div class="car-img">
+                    <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Jeep Compass">
+                </div>
+                <div class="car-content">
+                    <h3>Jeep Compass 2023</h3>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-car"></i> SUV
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-gas-pump"></i> Diesel
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-users"></i> 5 lugares
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tachometer-alt"></i> Automático
+                        </div>
+                    </div>
+                    <div class="car-footer">
+                        <div class="price">R$ 229/dia</div>
+                        <a href="#" class="btn btn-primary">Alugar Agora</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="car-card">
+                <div class="car-img">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Porsche 911">
+                </div>
+                <div class="car-content">
+                    <h3>Porsche 911 Carrera</h3>
+                    <div class="car-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-car"></i> Esportivo
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-gas-pump"></i> Gasolina
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-users"></i> 2 lugares
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tachometer-alt"></i> Automático
+                        </div>
+                    </div>
+                    <div class="car-footer">
+                        <div class="price">R$ 599/dia</div>
+                        <a href="#" class="btn btn-primary">Alugar Agora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us -->
+    <section class="why-us" id="services">
+        <div class="section-title">
+            <h2>Por Que Escolher a AutoRent?</h2>
+            <p>Oferecemos mais do que apenas aluguel de carros - oferecemos uma experiência completa</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Segurança Garantida</h3>
+                <p>Todos os nossos veículos passam por rigorosas inspeções de segurança antes de cada locação.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>Melhores Preços</h3>
+                <p>Garantimos as melhores tarifas do mercado com opções para todos os orçamentos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Suporte 24/7</h3>
+                <p>Nossa equipe está disponível a qualquer momento para auxiliar em qualquer necessidade.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <h3>Frota Diversificada</h3>
+                <p>Mais de 100 modelos diferentes para atender a todas as suas necessidades de viagem.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials" id="about">
+        <div class="section-title">
+            <h2>O Que Nossos Clientes Dizem</h2>
+            <p>Feedback de quem já experimentou nossos serviços</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Aluguei um carro na AutoRent para minhas férias e foi uma experiência incrível. O carro estava impecável e o atendimento foi excelente!"</p>
+                <div class="testimonial-author">
+                    <div class="author-img">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Silva">
+                    </div>
+                    <div class="author-info">
+                        <h4>Carlos Silva</h4>
+                        <p>Cliente desde 2021</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Sempre que preciso de um carro para viagens a trabalho, escolho a AutoRent. Eles têm ótimos preços e um processo de aluguel muito simples."</p>
+                <div class="testimonial-author">
+                    <div class="author-img">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Rodrigues">
+                    </div>
+                    <div class="author-info">
+                        <h4>Ana Rodrigues</h4>
+                        <p>Executiva de Vendas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Aluguei um SUV para uma viagem em família e foi perfeito! O carro era novo, confortável e o atendimento na devolução foi muito rápido."</p>
+                <div class="testimonial-author">
+                    <div class="author-img">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Roberto Almeida">
+                    </div>
+                    <div class="author-info">
+                        <h4>Roberto Almeida</h4>
+                        <p>Pai de Família</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>AutoRent</h3>
+                <p>Oferecendo soluções completas em aluguel de veículos desde 2010. Nossa missão é proporcionar a melhor experiência em mobilidade.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#cars">Carros</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Categorias</h3>
+                <ul>
+                    <li><a href="#">Econômicos</a></li>
+                    <li><a href="#">SUVs</a></li>
+                    <li><a href="#">Luxo</a></li>
+                    <li><a href="#">Esportivos</a></li>
+                    <li><a href="#">Família</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                    <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                    <li><i class="fas fa-envelope"></i> contato@autorent.com.br</li>
+                    <li><i class="fas fa-clock"></i> Seg-Sex: 8h às 18h | Sáb: 9h às 13h</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 AutoRent - Todos os direitos reservados
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

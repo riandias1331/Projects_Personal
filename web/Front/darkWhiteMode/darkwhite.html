@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página com Tema Light/Dark</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --primary-color: black;
+            --card-bg: #f5f5f5;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #f5f5f5;
+            --primary-color: white;
+            --card-bg: #1e1e1e;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .theme-toggle {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--primary-color);
+        }
+
+        /* Ícones usando Unicode (poderia usar Font Awesome também) */
+        .icon-sun::before {
+            content: "☀️";
+        }
+
+        .icon-moon::before {
+            content: "🌙";
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Meu Site</h1>
+            <button class="theme-toggle" id="themeToggle">
+                <span class="icon-sun"></span>
+                <span>Modo Escuro</span>
+            </button>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Bem-vindo ao Meu Site</h2>
+                <p>Este é um exemplo de página com alternância entre temas claro e escuro. Clique no botão no cabeçalho para mudar o tema.</p>
+            </div>
+
+            <div class="card">
+                <h2>Sobre os Temas</h2>
+                <p>O modo escuro é mais fácil para os olhos em ambientes com pouca luz e pode economizar energia em dispositivos com telas OLED.</p>
+                <p>O modo claro é tradicional e pode ser melhor para leitura em ambientes bem iluminados.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Meu Site. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('span:first-child');
+        const text = themeToggle.querySelector('span:last-child');
+
+        // Verifica se há preferência salva no localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.className = 'icon-moon';
+            text.textContent = 'Modo Claro';
+        }
+
+        // Alterna o tema quando o botão é clicado
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'icon-moon';
+                text.textContent = 'Modo Claro';
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.className = 'icon-sun';
+                text.textContent = 'Modo Escuro';
+            }
+        });
+
+        // Opcional: Verifica a preferência do sistema
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        if (prefersDark.matches && !savedTheme) {
+            body.classList.add('dark-mode');
+            icon.className = 'icon-moon';
+            text.textContent = 'Modo Claro';
+        }
+
+        prefersDark.addEventListener('change', e => {
+            if (!savedTheme) {
+                if (e.matches) {
+                    body.classList.add('dark-mode');
+                    icon.className = 'icon-moon';
+                    text.textContent = 'Modo Claro';
+                } else {
+                    body.classList.remove('dark-mode');
+                    icon.className = 'icon-sun';
+                    text.textContent = 'Modo Escuro';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

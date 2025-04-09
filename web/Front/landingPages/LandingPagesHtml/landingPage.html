@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandingPage</title>
+
+    <style>
+        *{
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(34,34,34);
+            color: white;
+            padding: 15px;
+        }
+
+        header{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        #title{
+            flex-direction: column;
+            line-height: 10px;
+        }
+        nav{
+            display: flex;
+            justify-content: space-between;
+        }
+        li{
+            display: inline-block;
+        }
+        a{
+            text-decoration: none;
+            
+            padding: 10px;
+            cursor: pointer;
+        }
+        a:hover{
+            
+            transition: 0.3s all;
+            /* color: rgb(38, 23, 241); */
+            
+        }
+        #a{
+            text-decoration: none;
+            cursor: pointer;
+            color: white;
+        }
+        #a:hover{
+            color: rgb(38, 23, 241);
+            transition: 0.3s all;
+            
+        }
+        #aa{
+            color: white;
+        }
+        #aa:hover{
+            color: rgb(209, 193, 193);
+        }
+        #btn-azul-login{
+            border: 2px solid rgb(38, 23, 241);
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+        }
+        #btn-azul-login:hover{
+            background-color: rgb(38, 23, 241);
+            cursor: pointer;
+            
+        }
+        h1{
+            font-weight: 200px;
+ 
+        }  
+        h2{
+            font-size: 60px;
+            line-height: 10px;
+        }
+        .container{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 50px;
+                
+        }
+        
+        img{
+            width: 500px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            
+        }
+        #btn{
+            height: 50px;
+            width: 50%;
+            background-color: rgb(38, 23, 241);
+            color: white;
+            font-weight: bold;
+
+        }
+        #btn:hover{
+            cursor: pointer;
+            background-color: rgb(19, 11, 133);;
+            color: white;
+
+        }
+        input{
+            margin-top: 20px;
+            height: 20px;
+            padding: 15px;
+            border-radius: 20px;
+            border: none;
+            font-size: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+
+        <header>
+
+            <div id="title">
+                <h1>Marketing </h1>
+                <h1>Criativo</h1>
+            </div>
+
+            <nav>
+                <ul>
+                    <li ><a id="a" href="#">Inicio</a></li >
+                    <li ><a id="a" href="#">Serviço</a></li >
+                    <li ><a id="a" href="#">Sobre</a></li >
+                    <li ><a id="a" href="/contato">Contato</a></li>
+                    <!-- <li id="btn-azul-login"><a id="aa" href="">Ja tem Uma Conta?</a></li> -->
+                    <!-- <li id="btn-azul-login"><a id="aa" href="#" onclick="window.location.href='login.html'">Ja tem Uma Conta?</a></li> -->
+                    <li id="btn-azul-login"><a id="aa" href="/login" >Ja tem Uma Conta?</a></li>
+                </ul>
+            </nav>
+
+        </header>
+        
+        <section class="container">
+
+            <aside>
+                <h2 id="azul">Inicio</h2>
+                <h2>Newslatter</h2>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </p>
+
+            </aside>
+
+            <article>
+                <img src="./" alt="">
+            </article>
+
+        </section>
+
+</body>
+</html>

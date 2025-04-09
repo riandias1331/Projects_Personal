@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlético Mineiro - Site Oficial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --preto: #000000;
+            --branco: #FFFFFF;
+            --cinza-escuro: #1E1E1E;
+            --cinza-claro: #F5F5F5;
+            --vermelho: #E51D37;
+            --amarelo: #FFD700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--branco);
+            color: var(--preto);
+        }
+        
+        /* Header */
+        .top-bar {
+            background-color: var(--preto);
+            color: var(--branco);
+            padding: 8px 0;
+            font-size: 0.8rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-icons a {
+            color: var(--branco);
+            margin-left: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Header */
+        .main-header {
+            padding: 20px 0;
+            background-color: var(--branco);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .main-nav li {
+            margin-left: 25px;
+            position: relative;
+        }
+        
+        .main-nav a {
+            color: var(--preto);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: var(--vermelho);
+        }
+        
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.atletico.com.br/wp-content/uploads/2023/05/estadio-arena-mrv.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: var(--branco);
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--vermelho);
+            color: var(--branco);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--preto);
+        }
+        
+        /* News Section */
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
+        
+        .section-title .divider {
+            flex-grow: 1;
+            height: 2px;
+            background-color: var(--cinza-claro);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .news-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-category {
+            display: inline-block;
+            background-color: var(--vermelho);
+            color: var(--branco);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .news-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        .main-footer {
+            background-color: var(--cinza-escuro);
+            color: var(--branco);
+            padding: 50px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--amarelo);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--branco);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--vermelho);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div>Site Oficial do Clube Atlético Mineiro</div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://www.atletico.com.br/wp-content/themes/atletico/assets/img/logo-atletico.svg" alt="Atlético Mineiro">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Futebol</a></li>
+                    <li><a href="#">Sócio-Torcedor</a></li>
+                    <li><a href="#">Arena MRV</a></li>
+                    <li><a href="#">Clube</a></li>
+                    <li><a href="#">Notícias</a></li>
+                    <li><a href="#">Multimídia</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Galo Forte Vingador</h1>
+                <p>O Clube Atlético Mineiro é uma das instituições esportivas mais tradicionais e vitoriosas do futebol brasileiro.</p>
+                <a href="#" class="btn">Seja Sócio-Torcedor</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Notícias -->
+        <section class="news-section">
+            <div class="section-title">
+                <h2>Últimas Notícias</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://www.atletico.com.br/wp-content/uploads/2023/05/jogo-atletico.jpg" alt="Jogo do Atlético" class="news-image">
+                    <div class="news-content">
+                        <span class="news-category">Futebol</span>
+                        <h3 class="news-title">Atlético vence e se aproxima da liderança do campeonato</h3>
+                        <p class="news-date">25 MAI 2023</p>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <img src="https://www.atletico.com.br/wp-content/uploads/2023/05/arena-mrv.jpg" alt="Arena MRV" class="news-image">
+                    <div class="news-content">
+                        <span class="news-category">Arena MRV</span>
+                        <h3 class="news-title">Conheça os novos detalhes da Arena MRV</h3>
+                        <p class="news-date">23 MAI 2023</p>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <img src="https://www.atletico.com.br/wp-content/uploads/2023/05/base-atletico.jpg" alt="Categorias de Base" class="news-image">
+                    <div class="news-content">
+                        <span class="news-category">Categorias de Base</span>
+                        <h3 class="news-title">Atlético conquista título importante na categoria sub-17</h3>
+                        <p class="news-date">20 MAI 2023</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>O Clube</h3>
+                    <ul>
+                        <li><a href="#">História</a></li>
+                        <li><a href="#">Títulos</a></li>
+                        <li><a href="#">Estrutura</a></li>
+                        <li><a href="#">Diretoria</a></li>
+                        <li><a href="#">Museu</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Futebol</h3>
+                    <ul>
+                        <li><a href="#">Elenco Profissional</a></li>
+                        <li><a href="#">Jogos</a></li>
+                        <li><a href="#">Tabelas</a></li>
+                        <li><a href="#">Categorias de Base</a></li>
+                        <li><a href="#">Estatísticas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Sócio-Torcedor</h3>
+                    <ul>
+                        <li><a href="#">Seja Sócio</a></li>
+                        <li><a href="#">Vantagens</a></li>
+                        <li><a href="#">Consulta de Débitos</a></li>
+                        <li><a href="#">Central de Atendimento</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="#">Fale Conosco</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                        <li><a href="#">Fornecedores</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 Clube Atlético Mineiro - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome para ícones -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
