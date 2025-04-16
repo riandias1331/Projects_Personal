@@ -2,5 +2,6 @@
     "watch": ["src"],
     "ext": "ts",
     "ignore": ["dist"],
-    "exec": "ts-node -r dotenv/config src/index.ts"
+    "exec": "ts-node -r dotenv/config server.ts"
 }
+
