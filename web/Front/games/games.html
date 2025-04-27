@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone - Tudo sobre jogos</title>
+    <style>
+        /* Reset e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: #4fc3f7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #0288d1;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a237e, #0d47a1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .logo span {
+            color: #4fc3f7;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Banner */
+        .banner {
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4fc3f7;
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0288d1;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        
+        /* Plataformas */
+        .platforms {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .platforms h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #4fc3f7;
+        }
+        
+        .platform-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .platform {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 150px;
+            transition: transform 0.3s;
+        }
+        
+        .platform:hover {
+            transform: translateY(-10px);
+        }
+        
+        .platform i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .platform.pc i { color: #2196f3; }
+        .platform.ps i { color: #0091ea; }
+        .platform.xbox i { color: #4caf50; }
+        
+        /* Jogos em Destaque */
+        .featured-games {
+            padding: 3rem 2rem;
+            background-color: #1e1e1e;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #4fc3f7;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .game-card {
+            background-color: #252525;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .game-info {
+            padding: 1.5rem;
+        }
+        
+        .game-info h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .game-rating {
+            color: #ffc107;
+        }
+        
+        .game-price {
+            font-weight: bold;
+            color: #4caf50;
+            font-size: 1.2rem;
+        }
+        
+        /* Notícias */
+        .news {
+            padding: 3rem 2rem;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .news-card {
+            background-color: #252525;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-date {
+            color: #b0b0b0;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-content h3 {
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .news-content p {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0d0d0d;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: #4fc3f7;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: #4fc3f7;
+            color: #000;
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .banner h1 {
+                font-size: 2rem;
+            }
+            
+            .banner p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Game<span>Zone</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#games">Jogos</a></li>
+                <li><a href="#news">Notícias</a></li>
+                <li><a href="#platforms">Plataformas</a></li>
+                <li><a href="#about">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="banner" id="home">
+        <div class="banner-content">
+            <h1>O Melhor do Mundo dos Games</h1>
+            <p>Notícias, análises e lançamentos de todos os jogos que você ama: Forza Horizon, God of War, FIFA, GTA, Call of Duty e muito mais!</p>
+            <a href="#games" class="btn">Explorar Jogos</a>
+        </div>
+    </section>
+    
+    <section class="platforms" id="platforms">
+        <h2>Plataformas</h2>
+        <div class="platform-icons">
+            <div class="platform pc">
+                <i class="fas fa-desktop"></i>
+                <h3>PC</h3>
+            </div>
+            <div class="platform ps">
+                <i class="fab fa-playstation"></i>
+                <h3>PlayStation</h3>
+            </div>
+            <div class="platform xbox">
+                <i class="fab fa-xbox"></i>
+                <h3>Xbox</h3>
+            </div>
+        </div>
+    </section>
+    
+    <section class="featured-games" id="games">
+        <h2 class="section-title">Jogos em Destaque</h2>
+        <div class="games-grid">
+            <!-- Jogo 1 -->
+            <div class="game-card" data-game="forza">
+                <img src="https://images.unsplash.com/photo-1630431346172-42f104722d6b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Forza Horizon">
+                <div class="game-info">
+                    <h3>Forza Horizon 5</h3>
+                    <div class="game-meta">
+                        <span class="game-platform"><i class="fab fa-xbox"></i> Xbox/PC</span>
+                        <span class="game-rating"><i class="fas fa-star"></i> 4.9</span>
+                    </div>
+                    <p>O mais recente jogo de corrida em mundo aberto da série Horizon.</p>
+                    <div class="game-price">R$ 249,90</div>
+                </div>
+            </div>
+            
+            <!-- Jogo 2 -->
+            <div class="game-card" data-game="godofwar">
+                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="God of War">
+                <div class="game-info">
+                    <h3>God of War: Ragnarök</h3>
+                    <div class="game-meta">
+                        <span class="game-platform"><i class="fab fa-playstation"></i> PS5</span>
+                        <span class="game-rating"><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                    <p>A continuação da jornada de Kratos e Atreus na mitologia nórdica.</p>
+                    <div class="game-price">R$ 349,90</div>
+                </div>
+            </div>
+            
+            <!-- Jogo 3 -->
+            <div class="game-card" data-game="fifa">
+                <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="FIFA 23">
+                <div class="game-info">
+                    <h3>FIFA 23</h3>
+                    <div class="game-meta">
+                        <span class="game-platform"><i class="fas fa-desktop"></i> Multiplataforma</span>
+                        <span class="game-rating"><i class="fas fa-star"></i> 4.5</span>
+                    </div>
+                    <p>A última edição da famosa série de jogos de futebol da EA Sports.</p>
+                    <div class="game-price">R$ 299,90</div>
+                </div>
+            </div>
+            
+            <!-- Jogo 4 -->
+            <div class="game-card" data-game="gta">
+                <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="GTA V">
+                <div class="game-info">
+                    <h3>GTA V</h3>
+                    <div class="game-meta">
+                        <span class="game-platform"><i class="fas fa-desktop"></i> Multiplataforma</span>
+                        <span class="game-rating"><i class="fas fa-star"></i> 4.7</span>
+                    </div>
+                    <p>O jogo de mundo aberto mais popular da história, agora com versão next-gen.</p>
+                    <div class="game-price">R$ 199,90</div>
+                </div>
+            </div>
+            
+            <!-- Jogo 5 -->
+            <div class="game-card" data-game="cod">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Call of Duty">
+                <div class="game-info">
+                    <h3>Call of Duty: Modern Warfare II</h3>
+                    <div class="game-meta">
+                        <span class="game-platform"><i class="fas fa-desktop"></i> Multiplataforma</span>
+                        <span class="game-rating"><i class="fas fa-star"></i> 4.6</span>
+                    </div>
+                    <p>A sequência do aclamado reboot da série Modern Warfare.</p>
+                    <div class="game-price">R$ 349,90</div>
+                </div>
+            </div>
+            
+            <!-- Jogo 6 -->
+            <div class="game-card" data-game="mk">
+                <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Mortal Kombat">
+                <div class="game-info">
+                    <h3>Mortal Kombat 11</h3>
+                    <div class="game-meta">
+                        <span class="game-platform"><i class="fas fa-desktop"></i> Multiplataforma</span>
+                        <span class="game-rating"><i class="fas fa-star"></i> 4.7</span>
+                    </div>
+                    <p>O lendário jogo de luta com violência extrema e fatalities brutais.</p>
+                    <div class="game-price">R$ 229,90</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="news" id="news">
+        <h2 class="section-title">Últimas Notícias</h2>
+        <div class="news-grid">
+            <!-- Notícia 1 -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Novo Call of Duty">
+                <div class="news-content">
+                    <div class="news-date">15 de Outubro, 2023</div>
+                    <h3>Call of Duty: Modern Warfare III anunciado oficialmente</h3>
+                    <p>A Activision revelou oficialmente o próximo jogo da franquia Call of Duty, que continuará a história do reboot de Modern Warfare.</p>
+                    <a href="#" class="btn">Ler Mais</a>
+                </div>
+            </div>
+            
+            <!-- Notícia 2 -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="God of War">
+                <div class="news-content">
+                    <div class="news-date">10 de Outubro, 2023</div>
+                    <h3>God of War: Ragnarök bate recordes de vendas</h3>
+                    <p>O aguardado jogo da Santa Monica Studio vendeu mais de 5 milhões de cópias em sua primeira semana, tornando-se o lançamento mais rápido da franquia.</p>
+                    <a href="#" class="btn">Ler Mais</a>
+                </div>
+            </div>
+            
+            <!-- Notícia 3 -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="GTA VI">
+                <div class="news-content">
+                    <div class="news-date">5 de Outubro, 2023</div>
+                    <h3>Vazamentos sugerem que GTA VI será anunciado em breve</h3>
+                    <p>Após o grande vazamento de setembro, fontes próximas à Rockstar afirmam que o aguardado anúncio de GTA VI pode acontecer nos próximos meses.</p>
+                    <a href="#" class="btn">Ler Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Sobre Nós</h3>
+                <p>GameZone é o seu portal completo sobre o mundo dos games, trazendo notícias, análises e informações sobre todos os jogos e plataformas.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#games">Jogos</a></li>
+                    <li><a href="#news">Notícias</a></li>
+                    <li><a href="#platforms">Plataformas</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Plataformas</h3>
+                <ul>
+                    <li><a href="#">PC</a></li>
+                    <li><a href="#">PlayStation 5</a></li>
+                    <li><a href="#">Xbox Series X/S</a></li>
+                    <li><a href="#">Nintendo Switch</a></li>
+                    <li><a href="#">Mobile</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contato@gamezone.com</li>
+                    <li><i class="fas fa-phone"></i> (11) 1234-5678</li>
+                    <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 GameZone. Todos os direitos reservados.
+        </div>
+    </footer>
+    
+    <script>
+        // Efeito de rolagem suave para os links do menu
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animação para os cards de jogos
+        const gameCards = document.querySelectorAll('.game-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        gameCards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+        
+        // Sistema de filtro de jogos (simplificado)
+        function filterGames(platform) {
+            gameCards.forEach(card => {
+                const cardPlatform = card.querySelector('.game-platform i').className;
+                if (platform === 'all' || cardPlatform.includes(platform)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Adicionando eventos aos ícones de plataforma
+        document.querySelector('.platform.pc').addEventListener('click', () => filterGames('fa-desktop'));
+        document.querySelector('.platform.ps').addEventListener('click', () => filterGames('playstation'));
+        document.querySelector('.platform.xbox').addEventListener('click', () => filterGames('xbox'));
+        
+        // Botão para mostrar todos os jogos
+        const showAllBtn = document.createElement('button');
+        showAllBtn.textContent = 'Mostrar Todos';
+        showAllBtn.className = 'btn';
+        showAllBtn.style.margin = '2rem auto';
+        showAllBtn.style.display = 'block';
+        showAllBtn.addEventListener('click', () => filterGames('all'));
+        document.querySelector('.featured-games').appendChild(showAllBtn);
+    </script>
+</body>
+</html>
