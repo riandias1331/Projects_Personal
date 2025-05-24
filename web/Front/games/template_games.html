@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome do Jogo - Site Oficial</title>
+    <style>
+        /* Reset e Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            transition: background 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ff0000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ff0000;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background: #cc0000;
+            transform: translateY(-3px);
+        }
+
+        /* Sobre o Jogo */
+        .about {
+            padding: 100px 40px;
+            background: #111;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ff0000;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Características */
+        .features {
+            padding: 100px 40px;
+            background: #000;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ff0000;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Galeria */
+        .gallery {
+            padding: 100px 40px;
+            background: #111;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Notícias */
+        .news {
+            padding: 100px 40px;
+            background: #000;
+        }
+
+        .news-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .news-excerpt {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #ff0000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Rodapé */
+        footer {
+            background: #000;
+            padding: 60px 40px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: #ff0000;
+        }
+
+        .social-links {
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #fff;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ff0000;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 56px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            nav ul li {
+                margin-left: 15px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header id="header">
+        <a href="#" class="logo">NOME<span>DOJOGO</span></a>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#features">Características</a></li>
+                <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#news">Notícias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>NOME DO JOGO</h1>
+            <p>Uma experiência de jogo revolucionária que redefine os limites da diversão digital. Prepare-se para a aventura mais emocionante do ano.</p>
+            <a href="#" class="btn">Pré-venda agora</a>
+        </div>
+    </section>
+
+    <!-- Sobre o Jogo -->
+    <section class="about" id="about">
+        <h2 class="section-title">Sobre o Jogo</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Uma Nova Era de Jogos</h3>
+                <p>NOME DO JOGO é a mais recente criação da nossa equipe, trazendo gráficos impressionantes, jogabilidade inovadora e uma história cativante que irá mantê-lo grudado na tela por horas.</p>
+                <p>Explore um mundo vasto e detalhado, interaja com personagens memoráveis e tome decisões que moldarão o destino do seu personagem.</p>
+                <p>Com mecânicas de jogo revolucionárias e um sistema de progressão único, NOME DO JOGO oferece uma experiência que você nunca viu antes.</p>
+                <a href="#" class="btn">Saiba mais</a>
+            </div>
+            <div class="about-image">
+                <img src="https://via.placeholder.com/600x400" alt="Sobre o Jogo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Características -->
+    <section class="features" id="features">
+        <h2 class="section-title">Características</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>Jogabilidade Inovadora</h3>
+                <p>Controles intuitivos e mecânicas de jogo que oferecem uma experiência fluida e imersiva.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌎</div>
+                <h3>Mundo Aberto</h3>
+                <p>Explore um vasto mundo cheio de segredos, missões secundárias e atividades para descobrir.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <h3>História Profunda</h3>
+                <p>Uma narrativa rica com personagens complexos e múltiplos finais baseados em suas escolhas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Gráficos Impressionantes</h3>
+                <p>Visual de última geração com detalhes realistas que trazem o mundo do jogo à vida.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3>Trilha Sonora Épica</h3>
+                <p>Música original composta por artistas premiados para complementar sua experiência de jogo.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <h3>Multiplayer</h3>
+                <p>Modo multiplayer expansivo onde você pode explorar o mundo com amigos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Galeria</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400" alt="Imagem do Jogo 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400" alt="Imagem do Jogo 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400" alt="Imagem do Jogo 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400" alt="Imagem do Jogo 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400" alt="Imagem do Jogo 5">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400" alt="Imagem do Jogo 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Notícias -->
+    <section class="news" id="news">
+        <h2 class="section-title">Últimas Notícias</h2>
+        <div class="news-container">
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Notícia 1">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">10 de Junho, 2023</div>
+                        <h3 class="news-title">Pré-venda disponível agora</h3>
+                        <p class="news-excerpt">O tão esperado jogo já está disponível para pré-venda em todas as plataformas. Garanta já o seu!</p>
+                        <a href="#" class="read-more">Leia mais →</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Notícia 2">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">25 de Maio, 2023</div>
+                        <h3 class="news-title">Novo trailer revelado</h3>
+                        <p class="news-excerpt">Assista ao novo trailer de gameplay que mostra as incríveis mecânicas do jogo.</p>
+                        <a href="#" class="read-more">Leia mais →</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Notícia 3">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">15 de Maio, 2023</div>
+                        <h3 class="news-title">Entrevista com o diretor</h3>
+                        <p class="news-excerpt">Leia nossa entrevista exclusiva com o diretor do jogo sobre o processo de desenvolvimento.</p>
+                        <a href="#" class="read-more">Leia mais →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <a href="#" class="footer-logo">NOME<span>DOJOGO</span></a>
+        <div class="social-links">
+            <a href="#"><i>Facebook</i></a>
+            <a href="#"><i>Twitter</i></a>
+            <a href="#"><i>Instagram</i></a>
+            <a href="#"><i>YouTube</i></a>
+            <a href="#"><i>Twitch</i></a>
+        </div>
+        <div class="footer-links">
+            <a href="#">Termos de Serviço</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Cookies</a>
+            <a href="#">Ajuda</a>
+            <a href="#">Contato</a>
+            <a href="#">Carreiras</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 NOME DO JOGO. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // Efeito de scroll no header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Suavizar rolagem para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
