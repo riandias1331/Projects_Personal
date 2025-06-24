@@ -1,30 +1,34 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-// Configurações
+// Middlewares
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Rotas
-const exemploRoutes = require('./src/routes/exemploRoutes');
-app.use('/api/exemplos', exemploRoutes);
+app.use('/api', userRoutes);
 
-// Conexão com o banco de dados
-const db = require('./src/models');
-db.sequelize.sync()
-  .then(() => {
-    console.log('Banco de dados conectado e sincronizado');
-  })
-  .catch((err) => {
-    console.log('Falha ao conectar ao banco de dados: ' + err.message);
-  });
-
-// Porta do servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}.`);
+// Rota de saúde
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date() });
 });
+
+// Tratamento de erros
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Erro interno do servidor' });
+});
+
+// Iniciar servidor
+const PORT = process.env.SERVER_PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+});
+
+// Export para testes
+module.exports = app;

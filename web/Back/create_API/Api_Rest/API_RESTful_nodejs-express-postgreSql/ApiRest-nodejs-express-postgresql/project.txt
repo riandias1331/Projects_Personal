@@ -1,0 +1,2 @@
+npm install express pg sequelize dotenv cors
+npm install --save-dev nodemon
