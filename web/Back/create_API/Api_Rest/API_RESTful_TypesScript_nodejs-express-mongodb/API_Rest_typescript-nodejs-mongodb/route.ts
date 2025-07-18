@@ -1,12 +1,14 @@
 import { Router } from 'express'
 const route: Router = Router()
 
-route.get('/users')
-route.get('/users/:id')
-route.post('/users')
-route.put('/users')
-route.delete('/users')
-route.delete('/users/:id')
+import * as userController from './src/controllers/userController';
+
+route.get('/users', userController.getUsersAll)
+route.get('/users/:id', userController.getUser)
+route.post('/users', userController.createUser)
+route.put('/users', userController.updateUser)
+route.delete('/users', userController.deleteUserAll)
+route.delete('/users/:id', userController.deleteUser)
 
 
 export default route

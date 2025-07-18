@@ -48,3 +48,12 @@ Edite o arquivo tsconfig.json com as seguintes configurações:
   "include": ["./**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
+
+
+// jwt
+
+npm install jsonwebtoken
+npm install --save-dev @types/jsonwebtoken
+
+npm install bcrypt
+npm install --save-dev @types/bcrypt
