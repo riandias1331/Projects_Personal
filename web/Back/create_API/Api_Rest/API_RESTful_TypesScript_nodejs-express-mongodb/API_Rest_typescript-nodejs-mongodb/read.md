@@ -1,3 +1,8 @@
+npm init -y
+npm i express dotenv mongoose nodemon  cors
+npm install --save-dev typescript @types/node @types/express @types/mongoose @types/cors
+
+
 {
   "name": "api-rest-typescript",
   "version": "1.0.0",
@@ -23,4 +28,23 @@
     "typescript": "^5.8.3",
     "ts-node": "^10.9.2"
   }
+}
+
+npx tsc --init
+
+
+Edite o arquivo tsconfig.json com as seguintes configurações:
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
