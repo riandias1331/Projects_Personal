@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import express, { Express } from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import routes from './route.ts'
+import routes from './route'
 
 dotenv.config()
 const app = express()
@@ -11,6 +11,7 @@ const port: string | number = process.env.PORT || 4444
 //  Middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors())
 
 // Routes
 app.use(routes)
