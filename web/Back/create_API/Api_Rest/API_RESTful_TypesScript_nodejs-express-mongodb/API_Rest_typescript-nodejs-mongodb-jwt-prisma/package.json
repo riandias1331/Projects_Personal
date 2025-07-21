@@ -2,7 +2,7 @@
   "name": "api_rest_typescript-nodejs-mongodb-prisma",
   "version": "1.0.0",
   "main": "index.js",
-"scripts": {
+  "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon --exec ts-node server.ts",
@@ -13,9 +13,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.4",
     "nodemon": "^3.1.10"
   },
@@ -23,6 +26,7 @@
     "@prisma/client": "^6.12.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^24.0.14",
     "prisma": "^6.12.0",
