@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+.todo-container {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#todo-input {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#add-btn {
+    padding: 10px;
+    width: 25%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#add-btn:hover {
+    background-color: #218838;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+#todo-list li {
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+    </style>
+</head>
+<body>
+    <h1>To-do List</h1>
+    <div class="todo-container">
+        <input type="text" id="todo-input" placeholder="Add a new task" />
+        <button id="add-btn">Add Task</button>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const todoInput = document.getElementById('todo-input');
+    const addBtn = document.getElementById('add-btn');
+    const todoList = document.getElementById('todo-list');
+
+    // Carrega as tarefas do LocalStorage ao iniciar
+    const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    savedTodos.forEach(todo => addTodoToDOM(todo));
+
+    // Adiciona nova tarefa
+    addBtn.addEventListener('click', () => {
+        const task = todoInput.value.trim();
+        if (task) {
+            const newTodo = { id: Date.now(), task };
+            addTodoToDOM(newTodo);
+            saveTodoToLocalStorage(newTodo);
+            todoInput.value = ''; // Limpa o campo de input
+        }
+    });
+
+    // Remove tarefa
+    todoList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-btn')) {
+            const id = e.target.dataset.id;
+            removeTodoFromDOM(id);
+            removeTodoFromLocalStorage(id);
+        }
+    });
+
+    function addTodoToDOM(todo) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${todo.task} 
+            <button class="delete-btn" data-id="${todo.id}">Delete</button>
+        `;
+        todoList.appendChild(li);
+    }
+
+    function saveTodoToLocalStorage(todo) {
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        todos.push(todo);
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    function removeTodoFromDOM(id) {
+        const todoItem = document.querySelector(`button[data-id="${id}"]`).parentElement;
+        todoItem.remove();
+    }
+
+    function removeTodoFromLocalStorage(id) {
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+        todos = todos.filter(todo => todo.id != id);
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+});
+
+    </script>
+</body>
+</html>
