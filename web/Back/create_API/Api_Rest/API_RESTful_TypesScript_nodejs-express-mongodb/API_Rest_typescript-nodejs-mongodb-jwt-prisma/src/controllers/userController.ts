@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 
 export const getUsers = async (req: Request, res: Response) => {
@@ -10,6 +10,7 @@ export const getUsers = async (req: Request, res: Response) => {
         const user = await prisma.user.findMany()
         res.status(201).json(user)
     } catch (error) {
+        console.log( error)
         res.status(500).json({ message: (error as Error).message })
     }
 }
@@ -43,8 +44,9 @@ export const createUser = async (req: Request, res: Response) => {
                 password: hashedPassword,
             },
         })
-        console.log('User created successfully', user)
-        res.status(201).json(user)
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+        console.log('User created successfully', user, 'Token: ', token)
+        res.status(201).json({ user, token })
     } catch (error) {
         console.log( 'Error creating user:', error)
         res.status(500).json({ message: (error as Error).message })
