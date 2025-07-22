@@ -1,22 +1,14 @@
-# Use a imagem oficial do Node.js
-FROM node:18-alpine
+FROM node:latest 
 
-# Define o diretório de trabalho
-WORKDIR /usr/src/app
+WORKDIR /API_RESTful_nodejs-express-mongodb-prisma_autenticaçãoJWT_docker
 
-# Copia os arquivos de configuração
 COPY package*.json ./
-COPY prisma ./prisma
 
-# Instala as dependências
-RUN npm install
-RUN npx prisma generate
+RUN npm install 
 
-# Copia o restante do código
 COPY . .
 
-# Expõe a porta 3000
 EXPOSE 3333
 
-# Comando para rodar a aplicação
-CMD ["npm", "start"]
+
+CMD ["node", "main.js"]
