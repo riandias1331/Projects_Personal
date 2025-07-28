@@ -43,7 +43,17 @@ const UserModel = {
 
   async delete(id) {
     await pool.query('DELETE FROM users WHERE id = $1', [id]);
+  },
+  
+  async deleteAll() {
+
+    const result = await pool.query('DELETE FROM users RETURNING *'); // Executa a query de DELETE sem cláusula WHERE para remover todos
+    return {
+      count: result.rowCount,
+      deletedUsers: result.rows
+    };
   }
+
 };
 
 export default UserModel;

@@ -50,6 +50,26 @@ const UsuarioController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+  },
+
+  async deleteUserAll(req, res) {
+    try {
+      //   // Antes de deletar, cria backup
+      // await backupService.createBackup('users_pre_delete');
+
+      if (process.env.NODE_ENV === 'production') {
+        return res.status(403).json({
+          error: "This operation is not allowed in production"
+        });
+      }
+      const result = await UserModel.deleteAll();
+      res.status(200).json({
+        message: `All users (${result.count}) were deleted successfully`,
+        deletedCount: result.count
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 };
 
