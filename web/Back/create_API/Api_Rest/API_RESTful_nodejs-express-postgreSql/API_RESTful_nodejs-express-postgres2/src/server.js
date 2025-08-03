@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import pool from './config/db.js'
-import userRoutes from './routes/userRoutes.js'
+import userRoutes from './routes/routes.js'
 import createUserTable from './data/createUserTable.js'
 import errorHandler from './middlewares/errorHandler.js'
 
