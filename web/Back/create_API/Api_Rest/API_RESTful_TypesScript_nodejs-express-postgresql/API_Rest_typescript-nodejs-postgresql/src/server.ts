@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import pool from '../src/config/config';
+import pool from './config/db';
 import userRoutes from '../src/routes/userRoutes';
 import createUserTable from './data/createUserTable';
 
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use('/api', userRoutes);
+app.use(userRoutes);
 
 // Database
 createUserTable();
